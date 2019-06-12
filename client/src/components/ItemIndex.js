@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Card, } from 'semantic-ui-react';
+import {Card, Button } from 'semantic-ui-react';
 import {Link, } from 'react-router-dom';
 import axios from 'axios';
 
@@ -17,13 +17,19 @@ const ItemIndex = (props) => {
     axios.get(`/api/departments/${props.dId}/items`)
     .then( res => {setItems(res.data)})}, [props])
   
+
+    // <Button  as={Link}to={{
+    //   pathname: '/departments/new/',
+    //   dInfo: {department}}}
   
   const renderItems = () => {
     // const {items, } = this.state
     if (items.length <= 0) return <h2>No Items</h2>
     return items.map(i => (
     <Link 
-    to={`/departments/${props.dId}/items/${i.id}`}
+    to={{
+      pathname: `/departments/${props.dId}/items/${i.id}`,
+      item: i,}}
     key={i.id}
     >
       <Card style={{padding: '10px', margin: '20px'}}>

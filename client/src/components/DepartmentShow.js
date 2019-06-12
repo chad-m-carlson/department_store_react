@@ -18,7 +18,6 @@ class DepartmentShow extends React.Component {
   }
 
   removeDepartment = () => {
-    // debugger
     axios.delete(`/api/departments/${this.props.match.params.id}`)
       .then(this.props.history.goBack)
   }

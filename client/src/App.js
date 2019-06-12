@@ -21,6 +21,7 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path='/departments' component={Departments} />
           <Route exact path='/departments/new' component={DepartmentForm} />
+          <Route exact path='/departments/new' component={DepartmentForm} />
           <Route exact path='/departments/:id' component={DepartmentShow} />
           <Route exact path='/departments/:id/items/:id' component={ItemShow} />
           <Route  component={NoMatch} />
