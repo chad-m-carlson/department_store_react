@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link, } from 'react-router-dom';
 import {Button, } from 'semantic-ui-react';
 
 
@@ -27,10 +28,10 @@ const renderItem = () => {
       {renderItem()}
       <Button onClick={props.history.goBack}>Go back</Button>
       <Button  as={Link}to={{
-          pathname: '/departments/new/',
-          dInfo: {department}}}
-      > Edit Department 
-      </Button > 
+          pathname: '/item/new/',
+          itemInfo: {item}}}
+            > Edit Item 
+        </Button > 
     </>
   )
 };

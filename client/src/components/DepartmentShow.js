@@ -41,6 +41,7 @@ class DepartmentShow extends React.Component {
         <Button onClick={this.props.history.goBack}>Go back</Button>
         </Item>
         <br />
+        <Button as={Link} to={'/item/new'}>Add an item</Button>
         <ItemIndex 
           dId={department.id}
         />

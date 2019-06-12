@@ -6,16 +6,6 @@ class DepartmentForm extends React.Component {
   defaultValues = {name: '', description: '', }
   state = {...this.defaultValues};
 
-  // componentDidMount() {
-  //   const {dInfo} = this.props.location
-  //   if (this.props.location.dInfo) {
-  //     this.setState({department: {
-  //                     name: dInfo.department.name, 
-  //                     description: dInfo.department.description,
-  //                     edit: true}})
-  //   };
-  // };
-
   componentDidMount() {
     const {dInfo,} = this.props.location
     if (dInfo){

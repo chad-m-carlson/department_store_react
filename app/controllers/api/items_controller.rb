@@ -13,7 +13,7 @@ class Api::ItemsController < ApplicationController
   def create
     item = @department.items.new(item_params)
     if item.save
-      render json: Item
+      render json: item
     else
       render json: item.errors, status: 422
     end
@@ -41,6 +41,6 @@ class Api::ItemsController < ApplicationController
     end
 
     def item_params
-      params.require(:item).permit(:name, :description, :price, )
+      params.require(:item).permit(:name, :description, :price, :department_id)
     end
 end
