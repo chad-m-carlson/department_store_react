@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import ItemIndex from './ItemIndex';
-
 import {Link, } from 'react-router-dom';
-import {Header, Button, Item} from 'semantic-ui-react';
+import {Item} from 'semantic-ui-react';
+import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
+
 
 class DepartmentShow extends React.Component {
   state = {
@@ -26,25 +27,28 @@ class DepartmentShow extends React.Component {
 
   render() {
     const {department} = this.state
-    const {remove} = this.props.location
     return(
       <>
-        <Item>
+      <ContentContainer>
+        <ShowCard>
           <h1>{this.state.department.name}</h1>
-          <h3>{this.state.department.description}</h3>
-        <Button  as={Link}to={{
-          pathname: '/departments/new/',
-          dInfo: {department}}}
+          <h4>{this.state.department.description}</h4>
+          <StyledButton  as={Link}to={{
+            pathname: '/departments/new/',
+            dInfo: {department}}}
             > Edit Department 
-        </Button > 
-        <Button  onClick={this.removeDepartment}>Delete Department</Button>
-        <Button onClick={this.props.history.goBack}>Go back</Button>
-        </Item>
+          </StyledButton > 
+          <StyledButton  onClick={this.removeDepartment}>Delete Department</StyledButton>
+          <StyledButton onClick={this.props.history.goBack}>Go back</StyledButton>
+        </ShowCard>
+        </ContentContainer>
         <br />
-        <Button as={Link} to={'/item/new'}>Add an item</Button>
-        <ItemIndex 
-          dId={department.id}
-        />
+        <ContentContainer>
+          <StyledButton as={Link} to={'/item/new'}>Add an item</StyledButton>
+          <ItemIndex 
+            dId={department.id}
+            />
+        </ContentContainer>
       </>
       )
     }

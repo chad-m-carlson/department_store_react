@@ -1,5 +1,4 @@
 import React from 'react';
-import {Route, Switch, } from 'react-router-dom';
 import Home from './components/Home';
 import Departments from './components/Departments';
 import DepartmentShow from './components/DepartmentShow';
@@ -8,15 +7,16 @@ import ItemShow from './components/ItemShow';
 import ItemForm from './components/ItemForm';
 import DepartmentForm from './components/DepartmentForm';
 import Navbar from './components/Navbar';
+import styled from 'styled-components';
+import {Route, Switch, } from 'react-router-dom';
 import {Container, } from 'semantic-ui-react';
 
 
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Container>
+      <AppContainer>
+        <Navbar />
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/departments' component={Departments} />
@@ -26,10 +26,13 @@ function App() {
           <Route exact path='/departments/:id/items/:id' component={ItemShow} />
           <Route  component={NoMatch} />
         </Switch>
-      </Container>
-    </>
-
+      </AppContainer>
   );
 }
+
+const AppContainer = styled.body`
+  background: #ededed;
+  height: 100vh;
+`;
 
 export default App;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, } from 'react-router-dom';
 import {Button, } from 'semantic-ui-react';
+import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
 
 
 const ItemShow = (props) => {
@@ -10,7 +11,7 @@ const renderItem = () => {
   if (item) {
     return (
     <>
-      <h2>{item.name}</h2>
+      <h1>{item.name}</h1>
       <h3>{item.description}</h3>
       <h4>${item.price}</h4>
     </>
@@ -23,16 +24,18 @@ const renderItem = () => {
 }
 
   return(
-    <>
-      <h1>ItemShow</h1>
+    <ContentContainer>
+      <ShowCard>
+
       {renderItem()}
-      <Button onClick={props.history.goBack}>Go back</Button>
-      <Button  as={Link}to={{
-          pathname: '/item/new/',
-          itemInfo: {item}}}
-            > Edit Item 
-        </Button > 
-    </>
+      <StyledButton onClick={props.history.goBack}>Go back</StyledButton>
+      <StyledButton  as={Link}to={{
+        pathname: '/item/new/',
+        itemInfo: {item}}}
+        > Edit Item 
+      </StyledButton > 
+      </ShowCard>
+    </ContentContainer>
   )
 };
 
