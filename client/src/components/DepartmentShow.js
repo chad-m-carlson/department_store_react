@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ItemIndex from './ItemIndex';
 import {Link, } from 'react-router-dom';
-import {Item} from 'semantic-ui-react';
+// import {Item} from 'semantic-ui-react';
 import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
 
 

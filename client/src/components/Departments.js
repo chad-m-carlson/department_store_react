@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Card, Button} from 'semantic-ui-react';
+import {Card, } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { ContentContainer, StyledButton, Header, IndexGroup } from '../Styles/Styles';

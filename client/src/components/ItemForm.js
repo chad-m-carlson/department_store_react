@@ -1,27 +1,28 @@
 import React from 'react';
 import axios from 'axios';
-import {Card, Form, Button, Select} from 'semantic-ui-react';
+import { Form, Button, Select} from 'semantic-ui-react';
 
 class ItemForm extends React.Component {
   state = {
-    name: '', description: '', price: '', department_id: '',
+    name: '', description: '', price: '', department_id: '', id: '',
     department: [],
   };
 
 
-  componentDidMount(){
+  // componentDidMount(){
+  // };
+  
+  componentDidMount() {
     axios.get('/api/departments')
     .then( res => {
       this.setState({department: res.data});
-    })};
-
-  // componentDidMount() {
-  //   const {dInfo,} = this.props.location
-  //   if (dInfo){
-  //     // const {name, description} = this.props.location.dInfo.department
-  //     this.setState({name: dInfo.department.name, description: dInfo.department.description})
-  //   }
-  // };
+    })
+    const {itemInfo,} = this.props.location
+    if (itemInfo){
+      // const {name, description} = this.props.location.dInfo.department
+      this.setState({department_id: itemInfo.item.department_id, description: itemInfo.item.description, price: itemInfo.item.price, name: itemInfo.item.name})
+    }
+  };
   
   handleChange = (e) => {
     const {name, value} = e.target
@@ -34,27 +35,27 @@ class ItemForm extends React.Component {
   
   handleSubmit = (e) => {
     const {itemInfo,} = this.props.location
-    const {name, description, price, department_id} = this.state
+    const {name, description, price, department_id,} = this.state
     e.preventDefault();
-    const item = {name, description, price, department_id};
+    const item = {name, description, price, department_id,};
     if (!itemInfo){
       axios.post(`/api/departments/${department_id}/items`, item)
       .then( res => {this.props.history.goBack();
       })
     }
-    // this.handleEdit(dInfo.department.id, department)
+    this.handleEdit(department_id, itemInfo.item.id, item)
   };
 
-  // handleEdit = (id, department) => {
-  //   axios.patch(`/api/departments/${id}`, department ).then(this.props.history.goBack());
-  // };
+  handleEdit = (dId, iId, item) => {
+    axios.patch(`/api/departments/${dId}/items/${iId}`, item ).then(this.props.history.push(`/departments/${dId}/items/${iId}`));
+  };
 
   
 
   render() {
     
     
-    const {name, description, price, department_id , department} = this.state
+    const {name, description, price, department} = this.state
     const {itemInfo,} = this.props.location
     // const {pName, pDescription} = this.props.location.dInfo.department
     return(
@@ -65,7 +66,7 @@ class ItemForm extends React.Component {
         label="Name"
         name='name'
         value={name}
-        placeholder="Department Name"
+        placeholder="Item Name"
         onChange={this.handleChange}
         required
         />
@@ -73,7 +74,7 @@ class ItemForm extends React.Component {
         label="Description"
         name='description'
         value={description}
-        placeholder="Department Description"
+        placeholder="Item Description"
         onChange={this.handleChange}
         />
         <Form.Input

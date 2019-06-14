@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import {Card, Form, Button} from 'semantic-ui-react';
+import {Form, Button} from 'semantic-ui-react';
 
 class DepartmentForm extends React.Component {
   defaultValues = {name: '', description: '', }

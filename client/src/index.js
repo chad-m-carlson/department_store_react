@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import './index.css';
 import App from './App';
+import './App.css'
 import 'semantic-ui-css/semantic.min.css';
 
 
 ReactDOM.render(
 <Router>
   <App />
-</Router>,
+</Router>,  
 
 document.getElementById('root'));
 

@@ -29,8 +29,9 @@ const ItemIndex = (props) => {
     return items.map(i => (
       <Link 
       to={{
-        pathname: `/departments/${props.dId}/items/${i.id}`,
-      item: i,}}
+      pathname: `/departments/${props.dId}/items/${i.id}`,
+      item: i,
+      department: props.dId}}
       key={i.id}
       >
       <Card style={{padding: '10px', margin: '20px'}}>
