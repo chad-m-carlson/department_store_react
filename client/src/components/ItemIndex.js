@@ -4,11 +4,6 @@ import {Link, } from 'react-router-dom';
 import {IndexGroup, } from '../Styles/Styles';
 import axios from 'axios';
 
-// class ItemIndex extends React.Component {
-//     state = {
-//       items: [{ }],
-//     }
-
 const ItemIndex = (props) => {
   const [items, setItems] = useState([])
   
@@ -16,7 +11,7 @@ const ItemIndex = (props) => {
   
   useEffect(() => {
     axios.get(`/api/departments/${props.dId}/items`)
-    .then( res => {setItems(res.data)})}, [props])
+    .then( res => {setItems(res.data)})},[props])
   
 
     // <Button  as={Link}to={{
@@ -30,8 +25,7 @@ const ItemIndex = (props) => {
       <Link 
       to={{
       pathname: `/departments/${props.dId}/items/${i.id}`,
-      item: i,
-      department: props.dId}}
+      state: {item: 1, department: props.dId}}}
       key={i.id}
       >
       <Card style={{padding: '10px', margin: '20px'}}>
@@ -43,7 +37,6 @@ const ItemIndex = (props) => {
     </Link>
     ));
   };
-  console.log(props)
   return(
     <IndexGroup>
       {renderItems()}

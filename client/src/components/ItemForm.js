@@ -6,22 +6,23 @@ class ItemForm extends React.Component {
   state = {
     name: '', description: '', price: '', department_id: '', id: '',
     department: [],
+    item: {},
   };
-
-
-  // componentDidMount(){
-  // };
   
   componentDidMount() {
+    const {id} = this.props.match.params
+    const {dId} = this.props.location.state
     axios.get('/api/departments')
     .then( res => {
       this.setState({department: res.data});
     })
-    const {itemInfo,} = this.props.location
-    if (itemInfo){
-      // const {name, description} = this.props.location.dInfo.department
-      this.setState({department_id: itemInfo.item.department_id, description: itemInfo.item.description, price: itemInfo.item.price, name: itemInfo.item.name})
+    if (id){
+      axios.get(`/api/departments/${dId}/items/${id}/`)
+        .then(res => (
+          this.setState({name: res.data.name, description: res.data.description, price: res.data.price, id: res.data.id})
+        ))
     }
+    
   };
   
   handleChange = (e) => {
@@ -32,18 +33,17 @@ class ItemForm extends React.Component {
   handleDropDown = (e) => {
     this.setState({ department_id: e.currentTarget.id})
   }
-  
+  // FIX IDS THAT CHECK TO SEE IF THIS IS EDIT OR NEW TO SOMETHING OTHER THAN ID SINCE I USE THAT IN MANY PLACES
   handleSubmit = (e) => {
-    const {itemInfo,} = this.props.location
-    const {name, description, price, department_id,} = this.state
     e.preventDefault();
+    const {name, description, price, department_id, id} = this.state
     const item = {name, description, price, department_id,};
-    if (!itemInfo){
+    if (!id){
       axios.post(`/api/departments/${department_id}/items`, item)
       .then( res => {this.props.history.goBack();
       })
     }
-    this.handleEdit(department_id, itemInfo.item.id, item)
+    this.handleEdit(department_id, id, item)
   };
 
   handleEdit = (dId, iId, item) => {
@@ -56,12 +56,12 @@ class ItemForm extends React.Component {
     
     
     const {name, description, price, department} = this.state
-    const {itemInfo,} = this.props.location
+    const {id,} = this.props.match.params
     // const {pName, pDescription} = this.props.location.dInfo.department
     return(
       <> 
       <Form onSubmit={this.handleSubmit}>
-        {!itemInfo ? <h1>New Item</h1> : <h1>Edit Item</h1>}
+        {!id ? <h1>New Item</h1> : <h1>Edit Item</h1>}
         <Form.Input 
         label="Name"
         name='name'

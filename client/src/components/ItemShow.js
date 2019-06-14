@@ -1,31 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import Item from './Item';
 import {Link, } from 'react-router-dom';
 import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
 
 
 const ItemShow = (props) => {
-  const {item} = props.location
-
-  const renderItem = () => {
-    if (item) {
-      return (
-      <>
-        <h1>{item.name}</h1>
-        <h3>{item.description}</h3>
-        <h4>${item.price}</h4>
-      </>
-      )
-    }return (
-      <>
-        <h2>Oops, look like something went wrong or this item doesn't exist anymore</h2>
-      </>
-    )
-  }
+  const {id} = props.match.params
+  const  dId = props.location.state.department
 
   const removeItem = (props) => {
-    // const {department_id, id} = props.location.item
-    axios.delete(`/api/departments/${props.location.department}/items/${props.location.item.id}`)
+    axios.delete(`/api/departments/${dId}/items/${id}`)
       .then(props.history.goBack)
   }
 
@@ -33,12 +18,14 @@ const ItemShow = (props) => {
   return(
     <ContentContainer>
       <ShowCard>
-
-      {renderItem()}
+      <Item 
+      departmentId={dId}
+      itemId={id}/>
       <StyledButton onClick={props.history.goBack}>Go back</StyledButton>
       <StyledButton  as={Link}to={{
-        pathname: '/item/new/',
-        itemInfo: {item}}}
+        pathname: `/item/${id}/edit/`,
+        state: {dId}
+      }}
         > Edit Item 
       </StyledButton > 
       <StyledButton onClick={() => removeItem(props)}>Delete Item</StyledButton>

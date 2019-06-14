@@ -7,11 +7,13 @@ class DepartmentForm extends React.Component {
   state = {...this.defaultValues};
 
   componentDidMount() {
-    const {dInfo,} = this.props.location
-    if (dInfo){
-      // const {name, description} = this.props.location.dInfo.department
-      this.setState({name: dInfo.department.name, description: dInfo.department.description})
-    }
+    const {id,} = this.props.match.params
+    if (id){
+      axios.get(`/api/departments/${id}`)
+        .then( res => (
+          this.setState({...res.data})
+        ))
+      }
   };
   
   handleChange = (e) => {
@@ -19,15 +21,15 @@ class DepartmentForm extends React.Component {
   };
   
   handleSubmit = (e) => {
-    const {dInfo,} = this.props.location
+    const {id} = this.props.match.params
     e.preventDefault();
     const department = {...this.state,};
-    if (!dInfo){
+    if (!id){
       axios.post('/api/departments', department)
       .then( res => {
-        this.props.history.goBack();
+        this.props.history.push(`/departments/${id}`);
       })
-    }this.handleEdit(dInfo.department.id, department)
+    }this.handleEdit(id, department)
   };
 
   handleEdit = (id, department) => {
@@ -36,12 +38,12 @@ class DepartmentForm extends React.Component {
 
   render() {
     const {name, description, } = this.state
-    const {dInfo,} = this.props.location
+    const {id,} = this.props.match.params
     // const {pName, pDescription} = this.props.location.dInfo.department
     return(
       <> 
       <Form onSubmit={this.handleSubmit}>
-        {!dInfo ? <h1>New Department</h1> : <h1>Edit Department</h1>}
+        {!id ? <h1>New Department</h1> : <h1>Edit Department</h1>}
         <Form.Input 
         label="Name"
         name='name'

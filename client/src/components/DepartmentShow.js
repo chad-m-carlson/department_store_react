@@ -26,16 +26,17 @@ class DepartmentShow extends React.Component {
 
 
   render() {
-    const {department} = this.state
+    const {department: {id, name, description}} = this.state
+    // const {id} = this.props.match.params
     return(
       <>
       <ContentContainer>
         <ShowCard>
-          <h1>{this.state.department.name}</h1>
-          <h4>{this.state.department.description}</h4>
+          <h1>{name}</h1>
+          <h4>{description}</h4>
           <StyledButton  as={Link}to={{
-            pathname: '/departments/new/',
-            dInfo: {department}}}
+            pathname: `/departments/${id}/edit/`,
+          }}
             > Edit Department 
           </StyledButton > 
           <StyledButton  onClick={this.removeDepartment}>Delete Department</StyledButton>
@@ -46,7 +47,7 @@ class DepartmentShow extends React.Component {
         <ContentContainer>
           <StyledButton as={Link} to={'/item/new'}>Add an item</StyledButton>
           <ItemIndex 
-            dId={department.id}
+            dId={id}
             />
         </ContentContainer>
       </>

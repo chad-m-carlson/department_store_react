@@ -20,6 +20,8 @@ function App() {
           <Route exact path='/departments' component={Departments} />
           <Route exact path='/item/new' component={ItemForm} />
           <Route exact path='/departments/new' component={DepartmentForm} />
+          <Route exact path='/item/:id/edit' component={ItemForm} />
+          <Route exact path='/departments/:id/edit' component={DepartmentForm} />
           <Route exact path='/departments/:id' component={DepartmentShow} />
           <Route exact path='/departments/:id/items/:id' component={ItemShow} />
           <Route  component={NoMatch} />
