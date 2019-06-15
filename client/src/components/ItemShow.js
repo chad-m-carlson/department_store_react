@@ -7,7 +7,7 @@ import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
 
 const ItemShow = (props) => {
   const {id} = props.match.params
-  const  dId = props.location.state.department
+  const  dId = props.location.state
 
   const removeItem = (props) => {
     axios.delete(`/api/departments/${dId}/items/${id}`)

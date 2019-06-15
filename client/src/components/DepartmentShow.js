@@ -45,7 +45,11 @@ class DepartmentShow extends React.Component {
         </ContentContainer>
         <br />
         <ContentContainer>
-          <StyledButton as={Link} to={'/item/new'}>Add an item</StyledButton>
+          <StyledButton 
+            as={Link} 
+            to={{
+              pathname: '/item/new',
+              state: 1 }}>Add an item</StyledButton>
           <ItemIndex 
             dId={id}
             />

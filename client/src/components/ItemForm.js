@@ -38,26 +38,23 @@ class ItemForm extends React.Component {
     e.preventDefault();
     const {name, description, price, department_id, id} = this.state
     const item = {name, description, price, department_id,};
-    if (!id){
+    if (!this.props.match.params.id){
       axios.post(`/api/departments/${department_id}/items`, item)
-      .then( res => {this.props.history.goBack();
+      .then( res => {this.props.history.push(`/departments/${department_id}`);
       })
     }
     this.handleEdit(department_id, id, item)
   };
 
   handleEdit = (dId, iId, item) => {
-    axios.patch(`/api/departments/${dId}/items/${iId}`, item ).then(this.props.history.push(`/departments/${dId}/items/${iId}`));
+    axios.patch(`/api/departments/${dId}/items/${iId}`, item ).then(this.props.history.push(`/departments/${dId}/items/${iId}`,dId));
   };
 
   
 
   render() {
-    
-    
     const {name, description, price, department} = this.state
     const {id,} = this.props.match.params
-    // const {pName, pDescription} = this.props.location.dInfo.department
     return(
       <> 
       <Form onSubmit={this.handleSubmit}>
@@ -92,7 +89,9 @@ class ItemForm extends React.Component {
           key: d.id,
           text: d.name,
           value: d.name,
-          id: d.id}))}>
+          id: d.id}))}
+          // defaultValue={department.name}
+          >
 
          </Select>
         <Button>Submit</Button>

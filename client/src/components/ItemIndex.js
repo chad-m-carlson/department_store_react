@@ -19,13 +19,13 @@ const ItemIndex = (props) => {
     //   dInfo: {department}}}
   
   const renderItems = () => {
-    // const {items, } = this.state
+    const {dId } = props
     if (items.length <= 0) return <h2>No Items</h2>
     return items.map(i => (
       <Link 
       to={{
       pathname: `/departments/${props.dId}/items/${i.id}`,
-      state: {item: 1, department: props.dId}}}
+      state: dId}}
       key={i.id}
       >
       <Card style={{padding: '10px', margin: '20px'}}>
