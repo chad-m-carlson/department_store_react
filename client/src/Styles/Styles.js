@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContentContainer = styled.div`
-  margin: 20px;
+  margin: 20px 20px 20px 200px;
 `;
 
 export const ShowCard = styled.div`
@@ -11,7 +11,7 @@ export const ShowCard = styled.div`
   border-radius: 5px;
   padding: 10px;
   background: #a8afbf;
-  margin: 10px 10px 10px 100px;
+  /* margin: 10px 10px 10px 100px; */
 
   > h4 {
     font-style: italic;
@@ -25,6 +25,7 @@ export const IndexGroup = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   justify-items: center;
+  /* margin-left: -100px; */
 `;
 
 export const StyledButton = styled.div`

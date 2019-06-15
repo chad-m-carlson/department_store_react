@@ -15,6 +15,7 @@
         body: Faker::TvShows::DumbAndDumber.quote,
         author: Faker::Name.name,
         rating: rand(0..5),
+        created: Faker::Time.between(2.days.ago, Date.today, :all)
       )
     end
   end

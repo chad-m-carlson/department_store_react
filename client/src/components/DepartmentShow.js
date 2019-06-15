@@ -31,29 +31,30 @@ class DepartmentShow extends React.Component {
     return(
       <>
       <ContentContainer>
+        <div>
+
         <ShowCard>
           <h1>{name}</h1>
           <h4>{description}</h4>
           <StyledButton  as={Link}to={{
             pathname: `/departments/${id}/edit/`,
           }}
-            > Edit Department 
+          > Edit Department 
           </StyledButton > 
           <StyledButton  onClick={this.removeDepartment}>Delete Department</StyledButton>
           <StyledButton onClick={this.props.history.goBack}>Go back</StyledButton>
         </ShowCard>
-        </ContentContainer>
-        <br />
-        <ContentContainer>
           <StyledButton 
             as={Link} 
+            style={{float: 'right', marginRight: '100px'}}
             to={{
               pathname: '/item/new',
               state: 1 }}>Add an item</StyledButton>
+        </div>
+        </ContentContainer>
           <ItemIndex 
             dId={id}
             />
-        </ContentContainer>
       </>
       )
     }

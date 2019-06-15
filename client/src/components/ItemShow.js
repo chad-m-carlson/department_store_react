@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Item from './Item';
+import Review from './Review';
 import {Link, } from 'react-router-dom';
 import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
 
@@ -30,6 +31,7 @@ const ItemShow = (props) => {
       </StyledButton > 
       <StyledButton onClick={() => removeItem(props)}>Delete Item</StyledButton>
       </ShowCard>
+      <Review itemId={id}/>
     </ContentContainer>
   )
 };
