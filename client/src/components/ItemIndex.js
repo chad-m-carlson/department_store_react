@@ -7,16 +7,9 @@ import axios from 'axios';
 const ItemIndex = (props) => {
   const [items, setItems] = useState([])
   
-
-  
   useEffect(() => {
     axios.get(`/api/departments/${props.dId}/items`)
     .then( res => {setItems(res.data)})},[props])
-  
-
-    // <Button  as={Link}to={{
-    //   pathname: '/departments/new/',
-    //   dInfo: {department}}}
   
   const renderItems = () => {
     const {dId } = props
