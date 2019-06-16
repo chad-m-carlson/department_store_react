@@ -13,6 +13,7 @@ const Item = (props) => {
   return(
     <>
       <h1>{item.name}</h1>
+      <h2>Rating{props.rating.toFixed(1)}</h2>
       <h3>{item.description}</h3>
       <h4>${item.price}</h4>
     </>

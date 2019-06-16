@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import Item from './Item';
 import Review from './Review';
@@ -7,6 +7,7 @@ import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
 
 
 const ItemShow = (props) => {
+  const [rating, setRating] = useState(0)
   const {id} = props.match.params
   const  dId = props.location.state
 
@@ -15,11 +16,33 @@ const ItemShow = (props) => {
       .then(props.history.goBack)
   }
 
+  useEffect(() => {
+    axios.get(`/api/items/${id}/reviews`)
+      .then( res => {
+        const ratings = res.data.map( r => r.rating).reduce((acc, c) => acc + c, 0)/res.data.length.toFixed(1);
+        setRating(ratings)
+      })
+  },[])
+
+// rating only changes on double click
+
+  const ratingChanged = (newReview) => {
+    // let x = newReview.newReview
+    // console.log(x)
+    // console.log(rating)
+    axios.get(`/api/items/${id}/reviews`)
+    .then( res => {
+      const ratings = res.data.map( r => r.rating).reduce((acc, c) => acc + c, 0)/res.data.length.toFixed(1);
+      setRating(ratings)
+    })
+  }
+
 
   return(
     <ContentContainer>
       <ShowCard>
       <Item 
+      rating={rating}
       departmentId={dId}
       itemId={id}/>
       <StyledButton onClick={props.history.goBack}>Go back</StyledButton>
@@ -31,7 +54,9 @@ const ItemShow = (props) => {
       </StyledButton > 
       <StyledButton onClick={() => removeItem(props)}>Delete Item</StyledButton>
       </ShowCard>
-      <Review itemId={id}/>
+      <Review 
+        ratingChanged={ratingChanged}
+        itemId={id}/>
     </ContentContainer>
   )
 };

@@ -1,27 +1,46 @@
 import React from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import { Comment, Header, Button, Icon} from 'semantic-ui-react';
+import { Comment, Header, Button, Icon, Rating} from 'semantic-ui-react';
 import {StyledButton} from '../Styles/Styles';
 
 class Review extends React.Component {
   state = {
     reviews: [],
+    newReview: {}
   };
+
 
   componentDidMount(){
     const {itemId} = this.props
     axios.get(`/api/items/${itemId}/reviews`)
-      .then( res => this.setState({reviews: res.data}))
+      .then( res => {
+        // const ratings = res.data.map( r => r.rating).reduce((acc, c) => acc + c, 0)/res.data.length
+        this.setState({reviews: res.data,})
+      });
   };
 
   handleDelete = (e, {id}) => {
     const {itemId} = this.props
     axios.delete(`/api/items/${itemId}/reviews/${id}`)
-      .then( res => {console.log('review deleted')})
+    .then( res => {console.log('review deleted')})
     const {reviews} = this.state
     this.setState({reviews: reviews.filter(r => (r.id !== id )),});
   };
+  
+  handleRate = (e, { rating }) =>  {
+    const {itemId} = this.props;
+    const {reviews} = this.state
+    const updatedReview = reviews.filter(r => (r.id == e.target.parentElement.id));
+    let x = {...updatedReview}
+    let y = {...x[0]}
+    y.rating = rating;
+    this.setState({newReview: {...y}})
+    let z = {newReview: {...y}}
+    const review = this.state.newReview
+    axios.put(`/api/items/${itemId}/reviews/${e.target.parentElement.id}`, review)
+    this.props.ratingChanged(z)
+  }
 
   render() {
     const {reviews} = this.state
@@ -42,6 +61,13 @@ class Review extends React.Component {
           onClick={this.handleDelete}
           ><Icon name='trash'/></Button>
         <Comment.Content>
+          <Rating 
+            id={r.id}
+            icon='heart' 
+            defaultRating={r.rating} 
+            maxRating={5} size='mini' 
+            onRate={this.handleRate} 
+            />
           <Comment.Author>{r.author}</Comment.Author>
           <Comment.Metadata>
             {/* <div>{r.updated_at.slice(11, -8)}</div> */}
