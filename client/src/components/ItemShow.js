@@ -22,21 +22,15 @@ const ItemShow = (props) => {
         const ratings = res.data.map( r => r.rating).reduce((acc, c) => acc + c, 0)/res.data.length.toFixed(1);
         setRating(ratings)
       })
-  },[])
-
-// rating only changes on double click
-
-  const ratingChanged = (newReview) => {
-    // let x = newReview.newReview
-    // console.log(x)
-    // console.log(rating)
+    },)
+    
+  const ratingChanged = () => {
     axios.get(`/api/items/${id}/reviews`)
     .then( res => {
       const ratings = res.data.map( r => r.rating).reduce((acc, c) => acc + c, 0)/res.data.length.toFixed(1);
       setRating(ratings)
     })
   }
-
 
   return(
     <ContentContainer>

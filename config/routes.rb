@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :items do
       resources :reviews
   end
+  get "all_items", to: "items#all_items"
 end
 end

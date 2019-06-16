@@ -8,6 +8,7 @@ import ItemForm from './components/ItemForm';
 import DepartmentForm from './components/DepartmentForm';
 import Navbar from './components/Navbar';
 import ReviewForm from './components/ReviewForm';
+import AllItems from './components/AllItems';
 import {Route, Switch, } from 'react-router-dom';
 
 
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/departments' component={Departments} />
           <Route exact path='/item/new' component={ItemForm} />
           <Route exact path='/departments/new' component={DepartmentForm} />
+          <Route exact path='/items' component={AllItems} />
           <Route exact path='/item/:id/edit' component={ItemForm} />
           <Route exact path='/departments/:id/edit' component={DepartmentForm} />
           <Route exact path='/departments/:id' component={DepartmentShow} />

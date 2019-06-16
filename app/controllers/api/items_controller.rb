@@ -1,9 +1,13 @@
 class Api::ItemsController < ApplicationController
-  before_action :set_department
+  before_action :set_department, except: [:all_items]
   before_action :set_item, only: [:show, :update, :destroy]
 
   def index
     render json: @department.items
+  end
+
+  def all_items
+    render json: Item.all
   end
 
   def show

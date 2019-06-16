@@ -14,7 +14,7 @@ const Navbar = () => (
         Departments
       </Menu.Item>
     </Link>
-    <Link to='/products'>
+    <Link to='/items'>
       <Menu.Item>
         Products
       </Menu.Item>

@@ -19,7 +19,7 @@ class ItemForm extends React.Component {
     if (id){
       axios.get(`/api/departments/${dId}/items/${id}/`)
         .then(res => (
-          this.setState({name: res.data.name, description: res.data.description, price: res.data.price, id: res.data.id})
+          this.setState({name: res.data.name, description: res.data.description, price: res.data.price, id: res.data.id, department_id: res.data.department_id})
         ))
     }
     
@@ -53,7 +53,7 @@ class ItemForm extends React.Component {
   
 
   render() {
-    const {name, description, price, department} = this.state
+    const {name, description, price, department, department_id} = this.state
     const {id,} = this.props.match.params
     return(
       <> 
@@ -81,7 +81,9 @@ class ItemForm extends React.Component {
         placeholder="Item Price"
         onChange={this.handleChange}
         />
-        <Select placeholder='Select Department'
+        <Select 
+          placeholder='Department Name'
+          defaultValue={department_id}
           name='department_id'
           onChange={this.handleDropDown}
           options={
@@ -90,13 +92,12 @@ class ItemForm extends React.Component {
           text: d.name,
           value: d.name,
           id: d.id}))}
-          // defaultValue={department.name}
           >
 
          </Select>
         <Button>Submit</Button>
-      </Form>
       <Button onClick={()=>this.props.history.goBack()}>Go back</Button>
+      </Form>
 
       </>
       )

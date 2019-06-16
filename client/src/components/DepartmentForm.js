@@ -31,10 +31,11 @@ class DepartmentForm extends React.Component {
       })
     }this.handleEdit(id, department)
   };
-
+  
   handleEdit = (id, department) => {
-    axios.patch(`/api/departments/${id}`, department ).then(this.props.history.goBack());
-  };
+    const dId = this.props.match.params.id
+    axios.patch(`/api/departments/${id}`, department )
+      .then(this.props.history.push(`/departments/${dId}`))}
 
   render() {
     const {name, description, } = this.state

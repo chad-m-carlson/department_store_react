@@ -9,6 +9,7 @@ class Review extends React.Component {
     reviews: [],
     newReview: {}
   };
+  
 
 
   componentDidMount(){
@@ -17,6 +18,9 @@ class Review extends React.Component {
       .then( res => {
         // const ratings = res.data.map( r => r.rating).reduce((acc, c) => acc + c, 0)/res.data.length
         this.setState({reviews: res.data,})
+        alert('Make sure to click the hearts in reviews multiple times, there is still a bug where it doesnt update on click,  but it does eventually change, it is actually two clicks behind the heart that you click on. JS is weird.....')
+        alert('This particular function is irrelevent in the real world, but it was fun to experiment with. Hopefully you are not annoyed with alerts yet')
+        alert('Sure wish someone would show me how to handle javascrip\'s asynchronous handling of data......')
       });
   };
 
@@ -31,15 +35,12 @@ class Review extends React.Component {
   handleRate = (e, { rating }) =>  {
     const {itemId} = this.props;
     const {reviews} = this.state
-    const updatedReview = reviews.filter(r => (r.id == e.target.parentElement.id));
+    const updatedReview = reviews.filter(r => (r.id === Number(e.target.parentElement.id)));
     let x = {...updatedReview}
     let y = {...x[0]}
     y.rating = rating;
-    this.setState({newReview: {...y}})
-    let z = {newReview: {...y}}
-    const review = this.state.newReview
-    axios.put(`/api/items/${itemId}/reviews/${e.target.parentElement.id}`, review)
-    this.props.ratingChanged(z)
+    axios.put(`/api/items/${itemId}/reviews/${e.target.parentElement.id}`, y)
+    this.props.ratingChanged()
   }
 
   render() {

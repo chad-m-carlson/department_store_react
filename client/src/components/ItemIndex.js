@@ -30,6 +30,7 @@ const ItemIndex = (props) => {
     </Link>
     ));
   };
+  
   return(
     <IndexGroup>
       {renderItems()}

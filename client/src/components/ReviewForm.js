@@ -1,6 +1,6 @@
 import React from 'react';
-import {Form, Button } from 'semantic-ui-react';
-import {ContentContainer, ShowCard, StyledButton } from '../Styles/Styles';
+import {Form, } from 'semantic-ui-react';
+import {ContentContainer, StyledButton } from '../Styles/Styles';
 import Axios from 'axios';
 
 class ReviewForm extends React.Component {
